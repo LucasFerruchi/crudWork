@@ -62,7 +62,14 @@ const cargarTabla = () => {
     let contenidoHtml = `<th scope="row">${producto.title}</th>
     <td>${producto.description}</td>
     <td>${producto.category}</td>
-    <td>${producto.price}</td>`;
+    <td>${producto.price}</td>
+   
+    <td>
+    <div class="d-flex gap-2">
+    <i class="fa fa-pencil text-success puntero" onclick="abrirModal(${producto.id})" aria-hidden="true"></i>
+    <i class="fa fa-trash-o text-danger puntero" onclick="eliminarProducto(${producto.id})" aria-hidden="true"></i>
+    </div>
+    </td>`;
 
     //Creamos el nodo
     // tableRow.append(contenidoHtml);
@@ -139,7 +146,8 @@ const eliminarProducto = (id) => {
     localStorage.setItem("productos", JSON.stringify(productos));
     cargarTabla();
   }
-  //e.------------Y COMENTAR EL PUNTO C. DE ABAJO
+  /*e.---Y COMENTAR EL PUNTO C. DE ABAJO, 
+  porq el cod ya esta dentro del e.*/
 
   // //c. Ahora decir a productos tenga un nuevo valor
   // productos = [...nuevoArreglo]; //SPREAD OPERATOR
@@ -153,7 +161,35 @@ const eliminarProducto = (id) => {
   // console.log(productos);
 };
 
-//Actualizar producto
+//9.Actualizar producto
+//9.g.Abrir modal
+const abrirModal = (id) => {
+  /*a.mostrar en consola que recibo el di del producto */
+  console.log(id);
+
+  /*------------------------------------------ */
+  /*b.h.Tambien necesito la posicion del elemento,
+  usamos el indexUpdate que creamos al principio*/
+  indexUpdate = productos.findIndex((item) => {
+    return item.id == id;
+  });
+  console.log(indexUpdate);
+  /*------------------------------------------ */
+
+  /*------------------------------------------ */
+  /*c.i.Capturar los campos del modal */
+  document.querySelector("#tituloModal").value = productos[indexUpdate].title;
+  document.querySelector("#descripcionModal").value =
+    productos[indexUpdate].description;
+  document.querySelector("#categoriaModal").value =
+    productos[indexUpdate].category;
+  document.querySelector("#precioModal").value = productos[indexUpdate].price;
+  document.querySelector("#imagenModal").value = productos[indexUpdate].image;
+  /*------------------------------------------ */
+
+  /*a.*/
+  myModal.show();
+};
 
 //La llamamos, para que cada vez que cargue la pagina se ejecute
 cargarTabla();
