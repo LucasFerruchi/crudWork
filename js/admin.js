@@ -198,7 +198,27 @@ const abrirModal = (id) => {
 //9.j. Funcion actualizarProducto
 const actualizarProducto = (event) => {
   event.preventDefault();
-  console.log(indexUpdate);
+  //Mostrar el sig log antes de continuar
+  // console.log(indexUpdate);
+
+  /*Asignamos los valores de las propiedades
+  a los input del form del modal*/
+  productos[indexUpdate].title = document.querySelector("#tituloModal").value;
+  productos[indexUpdate].description =
+    document.querySelector("#descripcionModal").value;
+
+  productos[indexUpdate].category =
+    document.querySelector("#categoriaModal").value;
+
+  productos[indexUpdate].price = document.querySelector("#precioModal").value;
+  productos[indexUpdate].image = document.querySelector("#imagenModal").value;
+
+  //Actualizar el lcoalStorage
+  localStorage.setItem("productos", JSON.stringify(productos));
+  //Cargar tabla
+  cargarTabla();
+  //Cerrar o escondar modal
+  myModal.hide();
 };
 //9.-----------------------------------------------------
 
@@ -283,4 +303,3 @@ cargarTabla();
 // };
 
 //!------------------------------------------------------
-//!cont clase 21 dic 15min
