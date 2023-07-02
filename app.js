@@ -122,37 +122,55 @@ const inicializacion = () => {
 
 //CONTENEDOR: donde iran las tarjetas de los prod en HTML (index.html)
 let contenedor = document.querySelector("#contenedor");
+
+//1.Traigo la card de bootstrap
+/*
+<div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+*/
+
+const listarProductos = () => {
+  contenedor.innerHTML = "";
+  productos.forEach((item) => {
+    //Creamos el NODO
+    let columna = document.createElement("div");
+    columna.className = "col";
+    /*Estructura de tarjeta y agregar el h-100, 
+    para que tengan todas el mismo alto*/
+    let tarjeta = `<div class="card h-100">
+   <!--Agrego un contenedor con clase contenedor-img-->
+    <div class="contenedor-img">
+   <!--A la imagen le agrego la clase img-tarjeta-->
+    <img src="${item.image}" class="card-img-top img-tarjeta" alt="${
+      item.title
+    }">
+    </div>
+<div class="card-body">
+  <h5 class="card-title">
+ <a class="nav-link" href="./pages/producto.html?id=${item.id}" >
+  ${item.title}
+  </a>
+  </h5>
+  <div class="text-muted puntero" >
+  <i class="${
+    item.favorito ? "fa fa-star fa-2x" : "fa fa-star-o fa-2x"
+  }" onclick="marcarFavorito(${item.id})" aria-hidden="true"></i>
+  </div>
+</div>
+</div>`;
+
+    columna.innerHTML = tarjeta;
+    contenedor.appendChild(columna);
+  });
+};
 // ------------------------------------------------------------------------------------------
-
-// const listarProductos = () => {
-//   contenedor.innerHTML = "";
-//   productos.forEach((item) => {
-//     let columna = document.createElement("div");
-//     columna.className = "col";
-//     let tarjeta = `<div class="card h-100">
-//     <div class="contenedor-img">
-//     <img src="${item.image}" class="card-img-top img-tarjeta" alt="${
-//       item.title
-//     }">
-//     </div>
-// <div class="card-body">
-//   <h5 class="card-title">
-//  <a class="nav-link" href="./pages/producto.html?id=${item.id}" >
-//   ${item.title}
-//   </a>
-//   </h5>
-//   <div class="text-muted puntero" >
-//   <i class="${
-//     item.favorito ? "fa fa-star fa-2x" : "fa fa-star-o fa-2x"
-//   }" onclick="marcarFavorito(${item.id})" aria-hidden="true"></i>
-//   </div>
-// </div>
-// </div>`;
-
-//     columna.innerHTML = tarjeta;
-//     contenedor.appendChild(columna);
-//   });
-// };
 
 // // const marcarFavorito = (index) => {
 // //   productos[index].favorito = !productos[index].favorito;
@@ -161,6 +179,7 @@ let contenedor = document.querySelector("#contenedor");
 // //   listarProductos();
 // // };
 
-// listarProductos();
+listarProductos();
 
 // //si favorito es true estrella pintada sino estrella vacia
+//!CONTINUA CLASE 21 DE DIC 38MIN
