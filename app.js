@@ -136,6 +136,7 @@ let contenedor = document.querySelector("#contenedor");
   </div>
 */
 
+//2.Funcion listarProductos------------------------------
 const listarProductos = () => {
   contenedor.innerHTML = "";
   productos.forEach((item) => {
@@ -154,10 +155,11 @@ const listarProductos = () => {
     </div>
 <div class="card-body">
   <h5 class="card-title">
- <a class="nav-link" href="./pages/producto.html?id=${item.id}" >
-  ${item.title}
-  </a>
+ ${item.title}
   </h5>
+  <!--Creo un div con text-muted para que la star
+  se vea gris y traigo de fontawsomw una star, y
+  le asignamos el onclick y la clase puntero-->
   <div class="text-muted puntero" >
   <i class="${
     item.favorito ? "fa fa-star fa-2x" : "fa fa-star-o fa-2x"
@@ -170,16 +172,21 @@ const listarProductos = () => {
     contenedor.appendChild(columna);
   });
 };
-// ------------------------------------------------------------------------------------------
+//2.--------------------------------------------------------
 
-// // const marcarFavorito = (index) => {
-// //   productos[index].favorito = !productos[index].favorito;
-// //   localStorage.setItem("productos", JSON.stringify(productos));
+//3.marcarFavorito---------------------------------------
+/*Hacer y desp comentarla porque la pasamos a global */
 
-// //   listarProductos();
-// // };
+// const marcarFavorito = (index) => {
+//   //cambiamos el valor de favorito
+//   productos[index].favorito = !productos[index].favorito;
+//   //guardamos en localStorage
+//   localStorage.setItem("productos", JSON.stringify(productos));
+//   //Listamos los producos de nuevo
+//   listarProductos();
+// };
+//3.--------------------------------------------------------
 
+//1.Funcion listarProductos------------------------------
 listarProductos();
-
-// //si favorito es true estrella pintada sino estrella vacia
-//!CONTINUA CLASE 21 DE DIC 38MIN
+//1.-----------------------------------------------------
