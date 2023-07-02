@@ -40,7 +40,6 @@ let productos = JSON.parse(localStorage.getItem("productos")) || [];
 let indexUpdate = null;
 
 //5.Cargar la tabla----------------------------------------------
-
 /*Traigo de bootstrap 5, la sig estructura de una tabla */
 
 /*
@@ -80,6 +79,7 @@ const cargarTabla = () => {
     cuerpoTabla.append(tableRow);
   });
 };
+//5.------------------------------------------------------
 
 //6.Crear producto----------------------------------------------
 const guardarProducto = (event) => {
@@ -125,8 +125,9 @@ const guardarProducto = (event) => {
   //6.n.Cargar tabla de nuevo
   cargarTabla();
 };
+//6.-----------------------------------------------------
 
-//Eliminar producto -- con el FILTER
+//7.Eliminar producto -- con el FILTER-------------------
 /*(metodo de array, da un nuevo arreglo)*/
 const eliminarProducto = (id) => {
   /*a.crea un nuevo arrglo */
@@ -139,7 +140,9 @@ const eliminarProducto = (id) => {
   la linea de arriba */
 
   //e. Preguntar si desea eliminar realmente
-  let validar = confirm(`Esta seguro que desea eliminar el producto?`);
+  let validar = confirm(
+    `Esta seguro que desea eliminar el producto con el id ${id}?`
+  );
 
   if (validar) {
     productos = [...nuevoArreglo];
@@ -160,15 +163,16 @@ const eliminarProducto = (id) => {
   // productos.splice(index, 1);
   // console.log(productos);
 };
+//7.-----------------------------------------------------
 
-//9.Actualizar producto
-//9.g.Abrir modal
+//9.Actualizar producto----------------------------------
+//9.g.Abrir modal y completarlo con los datos del prod
 const abrirModal = (id) => {
-  /*a.mostrar en consola que recibo el di del producto */
+  /*A.mostrar en consola que recibo el di del producto */
   console.log(id);
 
   /*------------------------------------------ */
-  /*b.h.Tambien necesito la posicion del elemento,
+  /*B.h.Tambien necesito la posicion del elemento,
   usamos el indexUpdate que creamos al principio*/
   indexUpdate = productos.findIndex((item) => {
     return item.id == id;
@@ -177,7 +181,7 @@ const abrirModal = (id) => {
   /*------------------------------------------ */
 
   /*------------------------------------------ */
-  /*c.i.Capturar los campos del modal */
+  /*C.i.Capturar los campos del modal */
   document.querySelector("#tituloModal").value = productos[indexUpdate].title;
   document.querySelector("#descripcionModal").value =
     productos[indexUpdate].description;
@@ -187,10 +191,96 @@ const abrirModal = (id) => {
   document.querySelector("#imagenModal").value = productos[indexUpdate].image;
   /*------------------------------------------ */
 
-  /*a.*/
+  /*A.*/
   myModal.show();
 };
 
-//La llamamos, para que cada vez que cargue la pagina se ejecute
+//9.j. Funcion actualizarProducto
+const actualizarProducto = (event) => {
+  event.preventDefault();
+  console.log(indexUpdate);
+};
+//9.-----------------------------------------------------
+
+//La llamamos, xa q cada vez q cargue la pag se ejecute
 cargarTabla();
-//5.----------------------------------------------
+//5.-----------------------------------------------------
+
+//!------------------------------------------------------
+//!------------------------------------------------------
+//!ELIMINAR PRODUCTO OTRA FORMA--------------------------
+// /*QUE EN EL MENSJA DE ADVERTENCIA APAREZCA
+// EL NOMBRE DEL PRODUCTO*/
+
+// //Agregaos al foeeach el index, EN CARGARTABLA
+// const cargarTabla = () => {
+//   cuerpoTabla.innerHTML = "";
+//   productos.forEach((producto, index) => {
+//     let tableRow = document.createElement("tr");
+//     let contenidoHtml = `<th scope="row">${producto.title}</th>
+//     <td>${producto.description}</td>
+//     <td>${producto.category}</td>
+//     <td>${producto.price}</td>
+
+//     <td>
+//     <div class="d-flex gap-2">
+//     <i class="fa fa-pencil text-success puntero" onclick="abrirModal(${producto.id})" aria-hidden="true"></i>
+//     <i class="fa fa-trash-o text-danger puntero" onclick="eliminarProducto(${index})" aria-hidden="true"></i>
+//     </div>
+//     </td>`;
+
+//     tableRow.innerHTML = contenidoHtml;
+
+//     cuerpoTabla.append(tableRow);
+//   });
+// };
+//!------------------------------------------------------
+
+// /*al modificar cargarTabla, aqui ahora estaria
+// recibiendo directamente la posicion */
+// const eliminarProducto = (index) => {
+//   let nuevoArreglo = productos.filter((producto) => {
+//     /*aqui decimos que traiga todos los prod
+//     que no tengan este id */
+//     return producto.id != productos[index].id;
+//   });
+
+//   let validar = confirm(
+//     //!cambiamos el mens
+//     `Esta seguro que desea eliminar el producto ${productos[index].title}?`
+//   );
+
+//   if (validar) {
+//     /*aqui decimos que el arreglo original, ahora,
+//     sea el nuevo arreglo */
+//     productos = [...nuevoArreglo];
+//     localStorage.setItem("productos", JSON.stringify(productos));
+//     cargarTabla();
+//   }
+// };
+
+//!------------------------------------------------------
+//!------------------------------------------------------
+//!ELIMINAR PRODUCTO CON SPLICE--------------------------
+// const eliminarProducto = (index) => {
+//   //!/*EL FILTER YA NO HARIA FALTA */
+//   // let nuevoArreglo = productos.filter((producto) => {
+//   //     return producto.id != productos[index].id;
+//   // });
+
+//   //!/*PREGUNTAMOS PRIMERO */
+//   let validar = confirm(
+//     `Esta seguro que desea eliminar el producto ${productos[index].title}?`
+//   );
+
+//   if (validar) {
+//     productos.splice(index, 1);
+//     //!/*EL SPREAD TAMPOCO HARIA FALTA */
+//     // productos = [...nuevoArreglo];
+//     localStorage.setItem("productos", JSON.stringify(productos));
+//     cargarTabla();
+//   }
+// };
+
+//!------------------------------------------------------
+//!cont clase 21 dic 15min
