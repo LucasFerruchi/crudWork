@@ -18,6 +18,30 @@ class Producto {
   }
 }
 
+//BOTON LOGIN--------------------------------------------
+let btnLogin = document.querySelector("#btn-login");
+//--------------------------------------------------------
+let usuario = JSON.parse(localStorage.getItem("user")) || [];
+/*obtenemos el user del localS */
+
+if (usuario) {
+  btnLogin.innerText = usuario;
+} else {
+  btnLogin.innerText = "Inicio de sesión";
+}
+
+//INICIO DE SESION--------------------------------------
+const sesion = () => {
+  if (usuario) {
+    localStorage.removeItem("user");
+    location.replace("http://127.0.0.1:5500/pages/login.html");
+    btnLogin.innerText = "Inicio de sesión";
+  } else {
+    localStorage.replace("http://127.0.0.1:5500/index.html");
+  }
+};
+//--------------------------------------------------------
+
 //3.marcarFavorito---------------------------------------
 const marcarFavorito = (id) => {
   //Obtenemos con el id la posicion
