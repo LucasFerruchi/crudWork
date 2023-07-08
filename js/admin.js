@@ -39,6 +39,34 @@ let productos = JSON.parse(localStorage.getItem("productos")) || [];
 //Almacenaremos el id del producto que quiero actualizar o modificar
 let indexUpdate = null;
 
+//! 10.Configuracion de la pag admin.html
+//a-Crear la funcion validarUsuario
+const validarUsuario = () => {
+  //1-Traigo el user del locaS
+  let usuario = JSON.parse(localStorage.getItem("user")) || null;
+
+  /*2-Si usuario es TRUE, cargar la tabla, sino
+  limpiar el html y dejar un mensaje*/
+  if (usuario) {
+    cargarTabla();
+  } else {
+    main.innerHTML = "";
+
+    //! 11. agregar el mensaje de alerta
+    //a-Creamos el div con su clase
+    let col = document.createElement("div");
+    col.classList = "row mt-3";
+    //b-contenido, un alert traido de la pag de bootstrap
+    let contenido = `<div class="col"><div class="alert alert-danger" role="alert">
+    No tiene permisos para acceder a esta página!
+    </div>
+    </div>`;
+
+    col.innerHTML = contenido;
+    main.append(col);
+  }
+};
+
 //5.Cargar la tabla----------------------------------------------
 /*Traigo de bootstrap 5, la sig estructura de una tabla */
 
@@ -222,9 +250,12 @@ const actualizarProducto = (event) => {
 };
 //9.-----------------------------------------------------
 
-//La llamamos, xa q cada vez q cargue la pag se ejecute
-cargarTabla();
-//5.-----------------------------------------------------
+// //La llamamos, xa q cada vez q cargue la pag se ejecute
+// cargarTabla();
+// //5.-----------------------------------------------------
+
+//! 10-
+validarUsuario();
 
 //!------------------------------------------------------
 //!------------------------------------------------------

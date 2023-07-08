@@ -18,26 +18,29 @@ class Producto {
   }
 }
 
-//BOTON LOGIN--------------------------------------------
+//4.a-BOTON LOGIN--------------------------------------------
 let btnLogin = document.querySelector("#btn-login");
 //--------------------------------------------------------
 let usuario = JSON.parse(localStorage.getItem("user")) || [];
 /*obtenemos el user del localS */
 
+//Cambiamos la configuracion del boton
 if (usuario) {
   btnLogin.innerText = usuario;
 } else {
   btnLogin.innerText = "Inicio de sesión";
 }
 
-//INICIO DE SESION--------------------------------------
+//4.b-FUNCION SESION--------------------------------------
 const sesion = () => {
   if (usuario) {
+    //Si el user esta logueado
     localStorage.removeItem("user");
-    location.replace("http://127.0.0.1:5500/pages/login.html");
     btnLogin.innerText = "Inicio de sesión";
+    location.replace("http://127.0.0.1:5500/index.html");
   } else {
-    localStorage.replace("http://127.0.0.1:5500/index.html");
+    //Si no esta logueado
+    localStorage.replace("http://127.0.0.1:5500/pages/login.html");
   }
 };
 //--------------------------------------------------------
