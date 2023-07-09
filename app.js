@@ -155,7 +155,10 @@ const listarProductos = () => {
     </div>
 <div class="card-body">
   <h5 class="card-title">
- ${item.title}
+  <a class="nav-link" href="./pages/producto.html?id=${item.id}">
+  
+  ${item.title}
+  </a>
   </h5>
   <!--Creo un div con text-muted para que la star
   se vea gris y traigo de fontawsomw una star, y

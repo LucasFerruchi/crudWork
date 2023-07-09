@@ -21,7 +21,7 @@ class Producto {
 //4.a-BOTON LOGIN--------------------------------------------
 let btnLogin = document.querySelector("#btn-login");
 //--------------------------------------------------------
-let usuario = JSON.parse(localStorage.getItem("user")) || [];
+let usuario = JSON.parse(localStorage.getItem("user")) || null;
 /*obtenemos el user del localS */
 
 //Cambiamos la configuracion del boton
@@ -36,11 +36,11 @@ const sesion = () => {
   if (usuario) {
     //Si el user esta logueado
     localStorage.removeItem("user");
-    btnLogin.innerText = "Inicio de sesión";
     location.replace("http://127.0.0.1:5500/index.html");
+    btnLogin.innerText = "Inicio de sesión";
   } else {
     //Si no esta logueado
-    localStorage.replace("http://127.0.0.1:5500/pages/login.html");
+    location.replace("http://127.0.0.1:5500/pages/login.html");
   }
 };
 //--------------------------------------------------------
